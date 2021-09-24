@@ -20,6 +20,7 @@ steps:
   displayName: 'npm install'
 
 - task: SonarQubePrepare@4
+  displayname: 'Prepare SonarQube Analysis'
   inputs:
     SonarQube: 'sonarqube'
     scannerMode: 'CLI'
@@ -28,14 +29,14 @@ steps:
     cliSources: '.''
 
 - script: |
-    npm run build
   displayName: 'npm build'
+    npm run build
 
-# Run Code Analysis task
 - task: SonarQubeAnalyze@4
+  displayName: 'Run Code Analysis task'
 
-# Publish Quality Gate Result task
 - task: SonarQubePublish@4
+  displayname: 'Publish Quality Gate Result task'
   inputs:
     pollingTimeoutSec: '300'
 
