@@ -21,7 +21,7 @@ steps:
 
 # Prepare Analysis Configuration task
 - task: SonarQubePrepare@4
-  displayname: 'Prepare SonarQube Analysis'
+  displayName: 'Prepare SonarQube Analysis'
   inputs:
     SonarQube: 'sonarqube'
     scannerMode: 'CLI'
