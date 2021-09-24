@@ -28,7 +28,6 @@ steps:
     cliSources: '.''
 
 - script: |
-  displayName: 'npm build'
     npm run build
 
 # Run Code Analysis task
