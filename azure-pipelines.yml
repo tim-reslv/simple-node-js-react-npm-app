@@ -10,18 +10,6 @@ pool: Default
 #  vmImage: ubuntu-latest
 
 steps:
-- task: JavaToolInstaller@0
-  inputs:
-    #versionSpec: '8' 
-    jdkArchitectureOption: x64 # Options: x64, x86
-    jdkSourceOption: AzureStorage # Options: AzureStorage, LocalDirectory
-    #jdkFile: # Required when jdkSourceOption == LocalDirectory
-    #azureResourceManagerEndpoint: # Required when jdkSourceOption == AzureStorage
-    #azureStorageAccountName: # Required when jdkSourceOption == AzureStorage
-    #azureContainerName: # Required when jdkSourceOption == AzureStorage
-    #azureCommonVirtualFile: # Required when jdkSourceOption == AzureStorage
-    jdkDestinationDirectory: 
-    #cleanDestinationDirectory: true 
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
