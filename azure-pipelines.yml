@@ -31,12 +31,15 @@ steps:
 
 - script: |
     npm run build
+  displayName: 'npm build'
 
 # Run Code Analysis task
 - task: SonarQubeAnalyze@4
+  displayName: 'SonarQube Analyze'
 
 # Publish Quality Gate Result task
 - task: SonarQubePublish@4
+  displayName: 'Publish SonarQube Scan Result'
   inputs:
     pollingTimeoutSec: '300'
 
