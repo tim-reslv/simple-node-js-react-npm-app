@@ -25,6 +25,7 @@ steps:
     scannerMode: 'CLI'
     configMode: 'manual'
     cliProjectKey: 'pwc_pwc'
+    cliSources: '.''
 
 - script: |
     npm run build
