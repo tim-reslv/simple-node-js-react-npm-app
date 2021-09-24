@@ -19,9 +19,24 @@ steps:
     npm install
   displayName: 'npm install'
 
+- task: SonarQubePrepare@4
+  inputs:
+    SonarQube: 'sonarqube'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'pwc_pwc'
+
 - script: |
     npm run build
   displayName: 'npm build'
+
+# Run Code Analysis task
+- task: SonarQubeAnalyze@4
+
+# Publish Quality Gate Result task
+- task: SonarQubePublish@4
+  inputs:
+    pollingTimeoutSec: '300'
 
 - task: Docker@2
   displayName: Build docker image
