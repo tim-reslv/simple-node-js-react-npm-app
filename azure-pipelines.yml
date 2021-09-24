@@ -27,16 +27,16 @@ steps:
   displayName: Build docker image
   inputs:
     repository: pwc/simple-node-js-react-npm-app
-	containerRegistry: docker_reslv_io
+    containerRegistry: docker_reslv_io
     command: build
     Dockerfile: Dockerfile
-	tags: latest
+    tags: latest
 	
 - task: Docker@2
   displayName: Push docker image
   inputs:
     repository: pwc/simple-node-js-react-npm-app
-	containerRegistry: docker_reslv_io
+    containerRegistry: docker_reslv_io
     command: push
     Dockerfile: Dockerfile
-	tags: latest
+    tags: latest
