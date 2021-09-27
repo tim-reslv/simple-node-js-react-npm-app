@@ -104,7 +104,7 @@ stages:
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
 
           - script: |
-              sed 's/:latest/:$(image-tag)/g' deployment.yml
+              sed 's/:latest/:$(image-tag)/g' manifests/deployment.yml
             displayName: 'Update image tag'
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
