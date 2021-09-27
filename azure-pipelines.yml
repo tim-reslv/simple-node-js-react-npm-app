@@ -102,7 +102,10 @@ stages:
               action: createSecret
               secretName: $(imagePullSecret)
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
-              
+
+          - script: |
+              sed 's/:latest/:$(image-tag)/g' deployment.yml
+            displayName: 'Update image tag'
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
@@ -116,12 +119,3 @@ stages:
                 $(imagePullSecret)
               containers: |
                 $(containerRegistry)/$(imageRepository):$(tag)
-          - task: KubernetesManifest@0
-            displayName: Patch
-            inputs: 
-              action: patch
-              kind: deployment
-              name: nodejs-deployment
-              mergeStrategy: strategic
-              patch: '{"spec": {"template": {"spec": {"containers": [{"name": "simple-node-js-react-npm-app","image": "$(containerRegistry)$(image-name):$(image-tag)"}]}}}}'
-              kubernetesServiceConnection: pwck8s
