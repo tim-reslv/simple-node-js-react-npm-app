@@ -88,7 +88,7 @@ stages:
   jobs:
   - deployment: Deploy
     displayName: Deploy
-    pool: default
+    pool: Default
     environment: 'dev'
     strategy:
       runOnce:
