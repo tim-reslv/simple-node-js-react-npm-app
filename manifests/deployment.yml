@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
       - name: simple-node-js-react-npm-app
-        image: docker.reslv.io/pwc/simple-node-js-react-npm-app:latest
+        image: $(containerRegistry)/$(image-name):$(tag)
         ports:
         - containerPort: 3000
         imagePullPolicy: Always
       imagePullSecrets:
-      - name: docker.reslv.io
+      - name: $(imagePullSecret)
