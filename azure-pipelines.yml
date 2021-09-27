@@ -15,7 +15,7 @@ variables:
 - name: containerRegistry
   value: docker.reslv.io/pwc
 - name: image-name
-  value: simple-node-js-react-npm-app
+  value: pwc/simple-node-js-react-npm-app
 - name: image-tag
   value: $(Build.BuildNumber)
 
@@ -64,7 +64,7 @@ stages:
     - task: Docker@2
       displayName: Build docker image
       inputs:
-        repository: $(containerRegistry)/$(image-name)
+        repository: $(image-name)
         containerRegistry: $(dockerRegistryServiceConnection)
         command: build
         Dockerfile: Dockerfile
@@ -73,7 +73,7 @@ stages:
     - task: Docker@2
       displayName: Push docker image
       inputs:
-        repository: $(containerRegistry)/$(image-name)
+        repository: $(image-name)
         containerRegistry: $(dockerRegistryServiceConnection)
         command: push
         Dockerfile: Dockerfile
