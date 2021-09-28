@@ -81,41 +81,41 @@ stages:
         Dockerfile: Dockerfile
         tags: $(image-tag)
 
-- stage: Deploy
-  displayName: Deploy stage
-  dependsOn: Build
-
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy
-    pool: Default
-    environment: 'dev'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: KubernetesManifest@0
-            displayName: Create imagePullSecret
-            inputs:
-              kubernetesServiceConnection: pwck8s
-              namespace: default
-              action: createSecret
-              secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
-
-          - script: |
-              sed 's/:latest/:$(image-tag)/g' manifests/deployment.yml
-            displayName: 'Update image tag'
-          - task: KubernetesManifest@0
-            displayName: Deploy to Kubernetes cluster
-            inputs:
-              kubernetesServiceConnection: pwck8s
-              namespace: default
-              action: deploy
-              manifests: |
-                manifests/deployment.yml
-                manifests/service.yml
-              imagePullSecrets: |
-                $(imagePullSecret)
-              containers: |
-                $(containerRegistry)/$(image-name):$(image-tag)
+#- stage: Deploy
+#  displayName: Deploy stage
+#  dependsOn: Build
+#
+#  jobs:
+#  - deployment: Deploy
+#    displayName: Deploy
+#    pool: Default
+#    environment: 'dev'
+#    strategy:
+#      runOnce:
+#        deploy:
+#          steps:
+#          - task: KubernetesManifest@0
+#            displayName: Create imagePullSecret
+#            inputs:
+#              kubernetesServiceConnection: pwck8s
+#              namespace: default
+#              action: createSecret
+#              secretName: $(imagePullSecret)
+#              dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+#
+#          - script: |
+#              sed 's/:latest/:$(image-tag)/g' manifests/deployment.yml
+#            displayName: 'Update image tag'
+#          - task: KubernetesManifest@0
+#            displayName: Deploy to Kubernetes cluster
+#            inputs:
+#              kubernetesServiceConnection: pwck8s
+#              namespace: default
+#              action: deploy
+#              manifests: |
+#                manifests/deployment.yml
+#                manifests/service.yml
+#              imagePullSecrets: |
+#                $(imagePullSecret)
+#              containers: |
+#                $(containerRegistry)/$(image-name):$(image-tag)
