@@ -14,9 +14,42 @@ spec:
     spec:
       containers:
       - name: simple-node-js-react-npm-app
-        image: $(containerRegistry)/$(image-name):$(tag)
+        image: $(containerRegistry)/$(image-name):$(image-tag)
         ports:
         - containerPort: 3000
         imagePullPolicy: Always
       imagePullSecrets:
       - name: $(imagePullSecret)
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-node-js-react-npm-app-service
+spec:
+  selector:
+    app: simple-node-js-react-npm-app
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: simple-node-js-react-npm-app-ingress-static
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+  - host: $(ingress_url)
+    http:
+      paths:
+      - path: /(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: simple-node-js-react-npm-app-service
+            port:
+              number: 3000
