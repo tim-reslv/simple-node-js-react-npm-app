@@ -24,12 +24,10 @@ steps:
   displayName: 'Run a one-line script'
 
 - script: |
-    echo ${{ variables.image-tag }} # outputs initialValue
     echo $(image-tag)
   displayName: image-tag
 
 - script: |
-    echo ${{ variables.repopath }} # outputs initialValue
     echo $(repopath)
   displayName: repopath
 
