@@ -16,10 +16,22 @@ variables:
   value: $(Build.BuildNumber)
 - name: imagePullSecret
   value: docker.reslv.io
+- name: repopath
+  value: $(Build.Repository.LocalPath)
 
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
+
+- script: |
+    echo ${{ variables.image-tag }} # outputs initialValue
+    echo $(image-tag)
+  displayName: image-tag
+
+- script: |
+    echo ${{ variables.repopath }} # outputs initialValue
+    echo $(repopath)
+  displayName: repopath
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
