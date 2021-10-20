@@ -1,0 +1,27 @@
+
+
+trigger:
+- main
+
+pool: Default
+
+variables:
+- name: dockerRegistryServiceConnection
+  value: docker_reslv_io
+- name: containerRegistry
+  value: docker.reslv.io
+- name: image-name
+  value: pwc/simple-node-js-react-npm-app
+- name: image-tag
+  value: $(Build.BuildNumber)
+- name: imagePullSecret
+  value: docker.reslv.io
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
