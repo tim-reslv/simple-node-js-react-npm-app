@@ -29,8 +29,8 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.Repository.LocalPath)'
-    ArtifactName: 'source'
+    PathtoPublish: '$(Build.Repository.LocalPath)/manifests'
+    ArtifactName: 'manifests'
     publishLocation: 'Container'
     
 - script: |
