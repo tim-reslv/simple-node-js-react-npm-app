@@ -27,10 +27,12 @@ steps:
     echo $(image-tag)
   displayName: image-tag
 
-- script: |
-    echo $(repopath)
-  displayName: repopath
-
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'yaml'
+    publishLocation: 'Container'
+    
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
