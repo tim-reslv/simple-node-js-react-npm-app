@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: simple-node-js-react-npm-app
-        image: $(containerRegistry)/$(image-name):$(image-tag)
+        image: __containerRegistry__/__image-name__:__image-tag__
         ports:
         - containerPort: 3000
         imagePullPolicy: Always
