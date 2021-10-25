@@ -19,7 +19,7 @@ spec:
         - containerPort: 3000
         imagePullPolicy: Always
       imagePullSecrets:
-      - name: $(imagePullSecret)
+      - name: __imagePullSecret__
 ---
 apiVersion: v1
 kind: Service
@@ -43,7 +43,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
-  - host: $(ingress_url)
+  - host: __ingress_url__
     http:
       paths:
       - path: /(.*)
